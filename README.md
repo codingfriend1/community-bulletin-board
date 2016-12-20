@@ -14,7 +14,8 @@ Getting up and running is as easy as 1, 2, 3, 4.
 2. Install your dependencies
 
     ```
-    cd path/to/community-bulletin-board; npm install
+    cd path/to/community-bulletin-board; npm i
+    cd path/to/community-bulletin-board/public; bower i
     ```
 
 3. Start MongoDB

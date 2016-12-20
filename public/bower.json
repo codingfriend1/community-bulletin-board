@@ -1,0 +1,26 @@
+{
+  "name": "community-bulletin-board",
+  "homepage": "https://github.com/codingfriend1/community-bulletin-board",
+  "authors": [
+    "Jon Paul Miles <codingfriend1@gmail.com>"
+  ],
+  "description": "A coding challenge",
+  "main": "",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "feathers-client": "feathersjs/feathers-client#^1.8.0",
+    "angular": "1.3.10",
+    "toastr": "^2.1.3",
+    "ng-tags-input": "^3.1.1",
+    "lodash": "^4.17.2"
+  }
+}

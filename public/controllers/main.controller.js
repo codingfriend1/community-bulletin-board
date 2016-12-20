@@ -45,6 +45,7 @@ window.app.controller("main", ['$scope', 'helpers', '$timeout', function($scope,
 
     $scope.fetchArticles();
 
+    // Check if the user is logged in
     window.feathers.authenticate().then((response) => {
       $timeout(function() {
         $scope.currentUser = response.data.email;
@@ -65,6 +66,7 @@ window.app.controller("main", ['$scope', 'helpers', '$timeout', function($scope,
 
     var MESSAGE_TIME = 3 * 1000;
 
+    // Removes server response message after a given amount of time
     function resetResponse() {
       $timeout(function() {
         $scope.creationResponse = "";
@@ -74,6 +76,7 @@ window.app.controller("main", ['$scope', 'helpers', '$timeout', function($scope,
       }, MESSAGE_TIME);
     }
 
+    // Checks that a password and email are set
     function validateEmailAndPassword() {
       if(!$scope.email || !$scope.password) {
         $timeout(function() {
@@ -98,7 +101,7 @@ window.app.controller("main", ['$scope', 'helpers', '$timeout', function($scope,
         return false;
       }
 
-      $scope.url = helpers.convertUrlToTitle($scope.title);
+      $scope.url = '/' + helpers.convertUrlToTitle($scope.title);
 
       api.articles.create({
         title: $scope.title,
@@ -152,7 +155,6 @@ window.app.controller("main", ['$scope', 'helpers', '$timeout', function($scope,
     };
 
     $scope.saveEdits = function(article) {
-      console.log("article.tags", article.tags);
       api.articles.updateOne(article._id, {title: article.title, body: article.body, tags: article.editTags}).then(function(response) {
         toastr.success('Article was successfully updated.');
         $timeout(function() {

@@ -15,7 +15,7 @@
 
 (function(){
 	/**
-	 * Sets up a rest endpoint for the given url so create, find, update, and delete can be performed on it. Calls generic error handler `errorHandler()` if error.
+	 * Sets up a rest endpoint for the given url so create, find, update, and delete can be performed on it.
 	 * @constructor
 	 * @param  {string} endpoint The URL of the server endpoint to reach. `/api/` prefix is already assumed.
 	 * @return {nothing}
@@ -26,7 +26,7 @@
 	}
 
 	/**
-	 * Adds content in the server database for the endpoint passed into the constructor function. Calls generic error handler `errorHandler()` if error.
+	 * Adds content in the server database for the endpoint passed into the constructor function.
 	 * @param  {object} content the item to be added to the database
 	 * @return {promise}         An object or array of items that were created
 	 */
@@ -35,7 +35,7 @@
 	};
 
 	/**
-	 * Gets data matching the query. Calls generic error handler `errorHandler()` if error.
+	 * Gets data matching the query.
 	 * @param  {object} identifier Raw mongoDB query
 	 * @return {promise}            An object or array of items matching the query
 	 */
@@ -44,7 +44,7 @@
 	};
 
 	/**
-	 * Updates data in the server database identified with a mongoDB query with the replacement data passed in. Calls generic error handler `errorHandler()` if error.
+	 * Updates data in the server database identified with a mongoDB query with the replacement data passed in.
 	 * @param  {object} identifier  Raw mongoDB query
 	 * @param  {object} replacement Whatever data you want to replace the found data with
 	 * @return {promise}             Number of items that were updated
@@ -58,7 +58,7 @@
 	};
 
 	/**
-	 * Deletes data from the server database that matches the mongoDB query passed in. Calls generic error handler `errorHandler()` if error.
+	 * Deletes data from the server database that matches the mongoDB query passed in.
 	 * @param  {object} identifier Raw mongoDB query
 	 * @return {promise}            http response object
 	 */
@@ -71,7 +71,7 @@
 	};
 
 	/**
-	 * Returns one item from the server that has the mongoDB _id passed in. Calls generic error handler `errorHandler()` if error.
+	 * Returns one item from the server that has the mongoDB _id passed in.
 	 * @param  {string} id The _id value of the object to retrieve
 	 * @return {promise}    Object that has that id
 	 */
@@ -80,7 +80,7 @@
 	};
 
 	/**
-	 * Updates one item in the database that has the _id passed in with the information in replacement. Calls generic error handler `errorHandler()` if error.
+	 * Updates one item in the database that has the _id passed in with the information in replacement.
 	 * @param  {string} id          The `_id` of the mongoDB object
 	 * @param  {object} replacement The content to replace the found object with
 	 * @return {promise}             Number of items replaced
@@ -94,7 +94,7 @@
 	}
 
 	/**
-	 * Deletes one item from the server database that has the _id that was passed in. Calls generic error handler `errorHandler()` if error.
+	 * Deletes one item from the server database that has the _id that was passed in.
 	 * @param  {string} id The _id of the mongoDB object to delete
 	 * @return {promise}    http response object
 	 */

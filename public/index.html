@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Community Bulletin Board</title>
+    <meta name="viewport" content="width=device-width">
+
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="bower_components/ng-tags-input/ng-tags-input.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="bower_components/toastr/toastr.min.css">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body ng-app="meanblog" ng-controller="main">
+    <div class="container">
+      <div class="row" ng-show="isLoggedIn">
+        <div class="col-sm-6 col-sm-offset-6 text-right">
+          Hello {{currentUser}}
+          <button type="button" class="btn btn-primary btn-warning" ng-click="logout()">Logout</button>
+        </div>
+      </div>
+
+      <header class="intro-header" mb-src="image-1" background-prefix="linear-gradient( rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2) )">
+          <div class="container disable-click">
+              <div class="row">
+                  <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                      <div class="site-heading enable-click">
+                          <h1>Community Bulletin Board</h1>
+                          <hr class="small">
+                          <p class="subheading">
+                            A public board
+                          </p>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </header>
+
+      <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+              <div class="post-preview" ng-repeat="post in posts">
+                  <a href="{{post.url}}">
+                      <h2 class="post-title">{{post.title}}</h2>
+                  </a>
+                  <p class="post-meta">Posted by <a href="#">{{post.createdBy}}</a> on {{post.createdAt}}</p>
+              </div>
+          </div>
+      </div>
+
+      <hr>
+
+      <div class="row" ng-show="!isLoggedIn">
+        <div class="col-sm-12">
+          <h2>Login or Signup</h2>
+          <div class="form-group">
+            <label for="email">Email address</label>
+            <input type="email" class="form-control" id="email" placeholder="Enter email" ng-model="email" ng-model-options="{'allowInvalid': true}">
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" placeholder="Password" ng-model="password">
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <button type="button" class="btn btn-success btn-block" ng-click="login()">Login</button>
+            </div>
+            <div class="col-sm-6">
+              <button type="button" class="btn btn-primary btn-block" ng-click="signup()">Sign up</button>
+            </div>
+          </div>
+          <br>
+          <div class="alert" ng-class="authenticateResponseClass" role="alert"> {{authenticateResponse}} </div>
+        </div>
+      </div>
+
+      <hr>
+
+      <div ng-show="isLoggedIn">
+        <h2>Create a new Article</h2>
+        <div class="form-group">
+          <label for="title">Blog Title</label>
+          <input type="text" class="form-control" id="title" placeholder="Title" ng-model="title">
+        </div>
+        <div class="form-group">
+          <label for="exampleTextarea">Blog Text</label>
+          <textarea class="form-control" id="exampleTextarea" rows="3" ng-model="text"></textarea>
+        </div>
+        <tags-input ng-model="tags"></tags-input>
+        <div class="alert" ng-show="responseClass" ng-class="responseClass" role="alert"> {{creationResponse}} </div>
+        <button type="submit" class="btn btn-primary" ng-click="createArticle()">Submit</button>
+      </div>
+
+      <h1>Articles</h1>
+
+      <div class="row">
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label>Filter By</label>
+            <select ng-options="filterOption for filterOption in filterOptions" ng-model="filterBy" ng-change="fetchArticles()" class="form-control"></select>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label>Ascending/Descending</label>
+            <select ng-model="asc" ng-change="fetchArticles()" class="form-control">
+              <option value="true">Ascending</option>
+              <option value="false">Descending</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label>Find by Tag</label>
+            <input type="text" ng-model="findTag" ng-change="fetchArticles()" class="form-control">
+          </div>
+        </div>
+      </div>
+      <hr>
+
+      <div class="row">
+        <div class="col-sm-12 article" ng-repeat="article in articles">
+          <div class="article-voter" ng-show="isLoggedIn">
+            <i class="fa fa-lg fa-caret-up upvote-icon" ng-click="upvote(article)"></i>
+            <div class="vote-num">{{article.votes}}</div>
+            <i class="fa fa-lg fa-caret-down downvote-icon" ng-click="downvote(article)"></i>
+          </div>
+          <div class="article-content">
+            <div class="panel">
+              <div class="panel-heading">
+                <div class="text-left">
+                  <div class="row">
+                    <div class="col-sm-12"></div>
+                      <h3 ng-show="!article.editMode">{{article.title}}</h3>
+                      <div class="form-group" ng-show="article.editMode">
+                        <label>Article Title</label>
+                        <input type="text" class="form-control" placeholder="" ng-model="article.title">
+                      </div>
+                      <span class="meta">By {{article.createdByEmail || "anonymous"}} at {{article.createdAt | date}}</span>
+                    </div>
+                  </div>
+                </div>
+
+              <div class="panel-body">
+                <div class="form-group" ng-show="article.editMode">
+                  <label>Body</label>
+                  <textarea class="form-control" rows="5" ng-model="article.body"></textarea>
+                </div>
+                <span ng-show="!article.editMode">{{article.body}}</span>
+              </div>
+
+              <div class="panel-footer">
+                <span class="label label-default" ng-repeat="tag in article.tags" ng-if="article.tags.length && !article.editMode">{{tag.text}}</span>
+                <tags-input ng-model="article.editTags" ng-if="article.createdByEmail === currentUser && article.editMode"></tags-input>
+              </div>
+
+              <div ng-show="article.editMode" class="row">
+                <div class="col-sm-6"><button type="button" class="btn btn-block btn-warning" ng-click="cancelEdits(article)">Cancel</button></div>
+                <div class="col-sm-6"><button type="button" class="btn btn-block btn-success" ng-click="saveEdits(article)">Save Changes</button></div>
+
+              </div>
+
+              <div ng-show="isLoggedIn" ng-if="article.createdByEmail === currentUser && !article.editMode">
+                <i class="fa fa-times fa-lg float-right delete-button" ng-click="deleteArticle(article)"></i>
+                <i class="fa fa-pencil fa-lg float-right edit-button" ng-click="editArticle(article)"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr>
+      </div>
+
+      <div class="row" ng-show="!articles.length">
+        <div class="col-sm-12">
+          <div class="alert alert-info">
+            No articles could be found.
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+    <script src="bower_components/feathers-client/dist/feathers.min.js"></script>
+    <script src="bower_components/jQuery/dist/jquery.min.js"></script>
+    <script src="bower_components/lodash/dist/lodash.min.js"></script>
+    <script src="bower_components/toastr/toastr.min.js"></script>
+
+    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/ng-tags-input/ng-tags-input.min.js"></script>
+
+
+    <script src="services/api/feathers.service.js"></script>
+    <script src="services/api/endpoints.service.js"></script>
+    <script src="services/api/api.service.js"></script>
+
+    <script src="app.js"></script>
+    <script src="services/helpers/helpers.service.js"></script>
+
+    <script src="controllers/main.controller.js"></script>
+
+  </body>
+</html>

@@ -1,0 +1,12 @@
+{
+  "host": "localhost",
+  "port": 3030,
+  "mongodb": "mongodb://localhost:27017/meanBlog",
+  "public": "../public/",
+  "auth": {
+    "token": {
+      "secret": "8F3rUxMl288foI3E+HGDxf1Kt0/wUbpMI5lmcGBfJoCYb+MqHJNfwJ4QWBjK1xs4gp7vJ5QV6oG55EecO3G3DA=="
+    },
+    "local": {}
+  }
+}

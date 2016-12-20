@@ -1,0 +1,193 @@
+/*
+ * Start Bootstrap - Landing Page (http://startbootstrap.com/)
+ * Copyright 2013-2016 Start Bootstrap
+ * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
+ */
+
+body,
+html {
+    width: 100%;
+    height: 100%;
+    padding-top: 1em;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: 700;
+}
+
+.intro-header {
+    padding-top: 50px; /* If you're making other pages, make sure there is 50px of padding to make sure the navbar doesn't overlap content! */
+    padding-bottom: 50px;
+    text-align: center;
+    /*color: #f8f8f8;*/
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+}
+
+.intro-message {
+    position: relative;
+    padding-top: 20%;
+    padding-bottom: 20%;
+    color: white;
+}
+
+.intro-message > h1 {
+    margin: 0;
+    text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
+    font-size: 5em;
+}
+
+.intro-divider {
+    width: 400px;
+    border-top: 1px solid #f8f8f8;
+    border-bottom: 1px solid rgba(0,0,0,0.2);
+}
+
+.intro-message > h3 {
+    text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
+}
+
+.article {
+  position: relative
+}
+
+.float-right {
+  float: right;
+}
+
+.delete-button {
+  font-size: 2em;
+  position: absolute;
+  top: 0.8em;
+  right: 1em;
+  padding-top: 0;
+}
+
+.delete-button:hover {
+  color: #d9534f;
+  cursor: pointer;
+}
+
+.edit-button {
+  font-size: 2em;
+  position: absolute;
+  top: 0.8em;
+  right: 3em;
+  padding-top: 0;
+}
+
+.edit-button:hover {
+  color: #3e8f3e;
+  cursor: pointer;
+}
+
+.section-heading {
+    margin-bottom: 30px;
+}
+
+.section-heading-spacer {
+    float: left;
+    width: 200px;
+    border-top: 3px solid #e7e7e7;
+}
+
+.banner {
+    padding: 100px 0;
+    color: #f8f8f8;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+}
+
+.banner h2 {
+    margin: 0;
+    text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
+    font-size: 3em;
+}
+
+.banner ul {
+    margin-bottom: 0;
+}
+
+.article-voter {
+  font-size: 2em;
+  display: inline-block;
+  margin-right: -0.25em;
+  vertical-align: top;
+  position: absolute;
+  width: 1em;
+}
+
+.article-voter i {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+}
+
+.article-voter .upvote-icon {
+  top: 0;
+}
+
+.article-voter .downvote-icon {
+  top: 1.8em;
+}
+
+.article-voter .vote-num  {
+  position: absolute;
+  left: 50%;
+  top: 1em;
+  transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+}
+
+.article-content {
+  display: inline-block;
+  padding-left: 3em;
+  box-sizing: border-box;
+  vertical-align: top;
+  width: 100%;
+}
+
+.article-content h3 {
+  margin-top: 0;
+}
+
+.article-content .meta {
+  font-size: 1em;
+  font-weight: normal;
+}
+
+.article-content p {
+  font-size: 1;
+  line-height: 1.6;
+  font-weight: normal;
+}
+
+.label {
+  margin-right: 0.5em;
+}
+
+@media(max-width:767px) {
+    .banner h2 {
+        margin: 0;
+        text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
+        font-size: 3em;
+    }
+}
